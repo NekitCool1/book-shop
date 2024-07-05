@@ -2,6 +2,7 @@ package book.shop.repository.impl;
 
 import book.shop.model.Book;
 import book.shop.repository.BookRepository;
+import exception.DataProcessingException;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,7 +32,7 @@ public class BookRepositoryImpl implements BookRepository {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Can't insert book into DB " + book, e);
+            throw new DataProcessingException("Can't insert book into DB " + book, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -46,7 +47,7 @@ public class BookRepositoryImpl implements BookRepository {
             return session.createQuery(
                     "SELECT b FROM Book b", Book.class).getResultList();
         } catch (Exception e) {
-            throw new RuntimeException("Can't ger all books from DB", e);
+            throw new DataProcessingException("Can't ger all books from DB", e);
         }
     }
 }
