@@ -48,7 +48,7 @@ public class BookRepositoryImpl implements BookRepository {
         try (Session session = sessionFactory.openSession()) {
             return Optional.ofNullable(session.get(Book.class, id));
         } catch (Exception e) {
-            throw new EntityNotFoundException("Can't find the book with id: " + id);
+            throw new DataProcessingException("Can't find the book with id: " + id, e);
         }
     }
 
@@ -58,7 +58,7 @@ public class BookRepositoryImpl implements BookRepository {
             return session.createQuery(
                     "SELECT b FROM Book b", Book.class).getResultList();
         } catch (Exception e) {
-            throw new EntityNotFoundException("Can't ger all books from DB " + e);
+            throw new DataProcessingException("Can't get all books from DB ", e);
         }
     }
 }
