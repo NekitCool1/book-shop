@@ -3,7 +3,6 @@ package book.shop.repository.impl;
 import book.shop.model.Book;
 import book.shop.repository.BookRepository;
 import exception.DataProcessingException;
-import exception.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import org.hibernate.Session;
