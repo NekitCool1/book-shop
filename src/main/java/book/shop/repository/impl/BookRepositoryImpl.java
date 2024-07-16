@@ -4,6 +4,7 @@ import book.shop.model.Book;
 import book.shop.repository.BookRepository;
 import exception.DataProcessingException;
 import java.util.List;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -42,12 +43,21 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
+    public Optional<Book> getBookById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return Optional.ofNullable(session.get(Book.class, id));
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't find the book with id: " + id, e);
+        }
+    }
+
+    @Override
     public List<Book> findAll() {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery(
                     "SELECT b FROM Book b", Book.class).getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't ger all books from DB", e);
+            throw new DataProcessingException("Can't get all books from DB ", e);
         }
     }
 }
