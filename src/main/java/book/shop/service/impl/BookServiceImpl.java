@@ -9,7 +9,6 @@ import book.shop.repository.BookRepository;
 import book.shop.service.BookService;
 import java.util.List;
 import java.util.Random;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
