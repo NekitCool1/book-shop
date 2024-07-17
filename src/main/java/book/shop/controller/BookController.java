@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/books")
+@RequestMapping(value = "/books")
 public class BookController {
     private final BookService bookService;
 
@@ -44,7 +44,7 @@ public class BookController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void deleteById(Long id) {
+    public void deleteById(@PathVariable Long id) {
         bookService.deleteBookById(id);
     }
 }

@@ -8,6 +8,7 @@ import book.shop.repository.BookRepository;
 import book.shop.service.BookService;
 import exception.EntityNotFoundException;
 import java.util.List;
+import java.util.Random;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDto save(CreateBookRequestDto requestDto) {
         Book book = bookMapper.toModel(requestDto);
+        book.setIsbn(String.valueOf(new Random().nextInt(1000)));
         return bookMapper.toDto(bookRepository.save(book));
     }
 
@@ -40,7 +42,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto updateBookById(Long id) {
-        return bookRepository.updateBookById(id);
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Can't found a book with id: " + id));
+        bookMapper.updateBookFromDto(bookMapper.toDto(book), book);
+        return bookMapper.toDto(bookRepository.save(book));
+
     }
 
     @Override
