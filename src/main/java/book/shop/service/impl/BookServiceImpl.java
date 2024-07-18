@@ -7,7 +7,6 @@ import book.shop.mapper.BookMapper;
 import book.shop.model.Book;
 import book.shop.repository.BookRepository;
 import book.shop.service.BookService;
-import exception.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
