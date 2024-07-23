@@ -7,6 +7,7 @@ import book.shop.exception.EntityNotFoundException;
 import book.shop.mapper.BookMapper;
 import book.shop.model.Book;
 import book.shop.repository.book.BookRepository;
+import book.shop.repository.book.BookSpecificationBuilder;
 import book.shop.service.BookService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
