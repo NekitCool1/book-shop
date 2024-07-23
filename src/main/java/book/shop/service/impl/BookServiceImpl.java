@@ -3,12 +3,12 @@ package book.shop.service.impl;
 import book.shop.dto.BookDto;
 import book.shop.dto.BookSearchParameters;
 import book.shop.dto.CreateBookRequestDto;
+import book.shop.exception.EntityNotFoundException;
 import book.shop.mapper.BookMapper;
 import book.shop.model.Book;
 import book.shop.repository.book.BookRepository;
 import book.shop.repository.book.BookSpecificationBuilder;
 import book.shop.service.BookService;
-import exception.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -43,11 +43,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDto updateBookById(Long id) {
+    public BookDto updateBookById(Long id, CreateBookRequestDto bookRequestDto) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Can't found a book with id: " + id));
-        bookMapper.updateBookFromDto(bookMapper.toDto(book), book);
+        bookMapper.updateBookFromDto(bookRequestDto, book);
         return bookMapper.toDto(bookRepository.save(book));
     }
 

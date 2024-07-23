@@ -8,5 +8,4 @@ public record BookDto(Long id,
                       BigDecimal price,
                       String description,
                       String coverImage) {
-
 }
