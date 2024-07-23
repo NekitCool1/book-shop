@@ -1,9 +1,9 @@
 package book.shop.repository.book;
 
+import book.shop.exception.EntityNotFoundException;
 import book.shop.model.Book;
 import book.shop.repository.SpecificationProvider;
 import book.shop.repository.SpecificationProviderManager;
-import exception.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
