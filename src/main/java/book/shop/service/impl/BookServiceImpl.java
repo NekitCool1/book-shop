@@ -4,7 +4,7 @@ import book.shop.dto.BookDto;
 import book.shop.dto.CreateBookRequestDto;
 import book.shop.mapper.BookMapper;
 import book.shop.model.Book;
-import book.shop.repository.book.BookRepository;
+import book.shop.repository.BookRepository;
 import book.shop.service.BookService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
