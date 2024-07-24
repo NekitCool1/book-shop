@@ -1,10 +1,10 @@
 package book.shop.repository.book;
 
-import book.shop.exception.EntityNotFoundException;
 import book.shop.model.Book;
 import book.shop.repository.SpecificationProvider;
 import book.shop.repository.SpecificationProviderManager;
 import java.util.List;
+import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +16,9 @@ public class BookSpecificationProviderManager implements SpecificationProviderMa
     @Override
     public SpecificationProvider<Book> getSpecificationProvider(String key) {
         return bookSpecificationProviders.stream()
-                .filter(b -> b.getKey().equals(key))
+                .filter(book -> book.getKey().equals(key))
                 .findFirst()
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new NoSuchElementException(
                         "Can't find correct specification provider for key: " + key));
     }
 }
