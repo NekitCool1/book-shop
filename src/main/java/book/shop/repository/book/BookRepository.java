@@ -1,4 +1,4 @@
-package book.shop.repository;
+package book.shop.repository.book;
 
 import book.shop.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;

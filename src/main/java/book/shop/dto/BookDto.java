@@ -2,11 +2,10 @@ package book.shop.dto;
 
 import java.math.BigDecimal;
 
-public class BookDto {
-    private Long id;
-    private String title;
-    private String author;
-    private BigDecimal price;
-    private String description;
-    private String coverImage;
+public record BookDto(Long id,
+                      String title,
+                      String author,
+                      BigDecimal price,
+                      String description,
+                      String coverImage) {
 }
