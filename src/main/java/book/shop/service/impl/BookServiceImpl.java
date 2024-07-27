@@ -8,7 +8,7 @@ import book.shop.model.Book;
 import book.shop.repository.book.BookRepository;
 import book.shop.repository.book.BookSpecificationBuilder;
 import book.shop.service.BookService;
-import exception.EntityNotFoundException;
+import book.shop.exception.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
