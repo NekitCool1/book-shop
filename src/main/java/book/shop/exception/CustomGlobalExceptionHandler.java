@@ -1,6 +1,6 @@
 package book.shop.exception;
 
-import book.shop.dto.Response;
+import book.shop.dto.BookApiResponse;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
@@ -42,8 +42,8 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException e) {
         String message = String.format("%s, %s", LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")), e.getMessage());
-        Response response = new Response(message);
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        BookApiResponse bookApiResponse = new BookApiResponse(message);
+        return new ResponseEntity<>(bookApiResponse, HttpStatus.NOT_FOUND);
     }
 
     private String getErrorMessage(ObjectError error) {
