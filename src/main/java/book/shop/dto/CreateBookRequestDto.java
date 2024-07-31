@@ -2,7 +2,6 @@ package book.shop.dto;
 
 import book.shop.validation.Author;
 import book.shop.validation.Unique;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

@@ -25,6 +25,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     private static final String ERRORS = "errors";
     private static final String DATA_FORMAT = "yyyy.MM.dd HH:mm";
     private static final String SPACE = " ";
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex,
