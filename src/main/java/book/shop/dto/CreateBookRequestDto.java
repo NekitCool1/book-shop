@@ -5,6 +5,7 @@ import book.shop.validation.Unique;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import lombok.Data;
 
@@ -16,8 +17,10 @@ public class CreateBookRequestDto {
     @Author
     private String author;
     @NotNull
-    @Min(0)
+    @Positive
     private BigDecimal price;
+    @NotBlank
+    @Unique
     private String description;
     private String coverImage;
     @NotBlank

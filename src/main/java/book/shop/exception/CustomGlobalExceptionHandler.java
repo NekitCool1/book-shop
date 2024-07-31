@@ -20,6 +20,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
+    private static final String TIMESTAMP = "timestamp";
+    private static final String STATUS = "status";
+    private static final String ERRORS = "errors";
+    private static final String DATA_FORMAT = "yyyy.MM.dd HH:mm";
+    private static final String SPACE = " ";
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex,
@@ -28,20 +33,20 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             WebRequest request
     ) {
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")));
-        body.put("status", HttpStatus.BAD_REQUEST);
+        body.put(TIMESTAMP, LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern(DATA_FORMAT)));
+        body.put(STATUS, HttpStatus.BAD_REQUEST);
         List<String> errors = ex.getBindingResult().getAllErrors().stream()
                 .map(this::getErrorMessage)
                 .toList();
-        body.put("errors", errors);
+        body.put(ERRORS, errors);
         return new ResponseEntity<>(body, headers, status);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException e) {
         String message = String.format("%s, %s", LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")), e.getMessage());
+                .format(DateTimeFormatter.ofPattern(DATA_FORMAT)), e.getMessage());
         BookApiResponse bookApiResponse = new BookApiResponse(message);
         return new ResponseEntity<>(bookApiResponse, HttpStatus.NOT_FOUND);
     }
@@ -50,7 +55,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         if (error instanceof FieldError fieldError) {
             String errorField = fieldError.getField();
             String defaultMessage = fieldError.getDefaultMessage();
-            return errorField + " " + defaultMessage;
+            return errorField + SPACE + defaultMessage;
         }
         return error.getDefaultMessage();
     }
